@@ -2,7 +2,8 @@ let path = require('path');
 let webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+
+const entryFile = process.env.ENTRY_FILE;
 
 let definePlugin = new webpack.DefinePlugin({
   '__DEBUG__': true
@@ -11,8 +12,9 @@ let definePlugin = new webpack.DefinePlugin({
 module.exports = {
   entry: {
     app: [
-      path.resolve(__dirname, 'src/main')
-    ]
+      path.resolve(__dirname, entryFile)
+    ],
+    "s0-engine": ["s0-engine"]
   },
   devtool: 'source-map',
   output: {
@@ -20,21 +22,25 @@ module.exports = {
     path: path.resolve(__dirname, 'build/debug'),
     filename: 'js/[name].js'
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 's0-engine',
+          test: 's0-engine',
+          enforce: true
+        },
+      }
+    },
+  },
   plugins: [
     definePlugin,
     new webpack.HotModuleReplacementPlugin(),
-    new CopyWebpackPlugin([
-      { context: 'resources/', from: '**/*', to: './' },
-    ]),
     new HtmlWebpackPlugin({
       template: './index.html',
       inject: true,
       filename: 'index.html'
-    }),
-    new BrowserSyncPlugin({
-      host: 'localhost',
-      port: 3000,
-      server: { baseDir: [path.resolve(__dirname, 'build/debug')] }
     })
   ],
   module: {
@@ -55,8 +61,5 @@ module.exports = {
     net: 'empty',
     tls: 'empty'
   },
-  // externals: {
-  //   "s0-engine": "s0-engine"
-  // },
-  watch: true
+  mode: "development"
 };

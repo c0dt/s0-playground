@@ -4,12 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode=development",
+    "gulp": "./node_modules/gulp/bin/gulp.js",
+    "test": "ENTRY_FILE='src/main' webpack --mode=development",
+    "test-visualizer": "ENTRY_FILE='src/visualizer' webpack --mode=development",
     "build": "NODE_ENV=production webpack -p --config ./webpack.production.config.js"
   },
   "author": "",
   "license": "ISC",
-
   "private": true,
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp": "gulpjs/gulp.git#4.0",
+    "gulp-filter": "^5.1.0",
+    "gulp-pngquant": "^1.0.12",
+    "gulp-zip": "^4.1.0",
+    "webpack-stream": "^4.0.2"
+  }
 }

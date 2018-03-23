@@ -1,4 +1,4 @@
-import { S0, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoader } from 's0-engine';
+import { S0, Scene, Node, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoader} from 's0-engine';
 
 export default class Main {
   constructor() {
@@ -31,19 +31,15 @@ export default class Main {
       });
     loadTasks.push(task);
     
-    let urls = [
-      'Ganfaul/model.gltf'
-    ];
     Promise.all(loadTasks).then(
       () => {
-        urls.forEach((url) => {
-          ResourcePipeline.loadAsync(`${url}`).then(
-            (asset) => {
-              S0.addScene(asset);
-              return asset;
-            }
-          );
-        });
+        let scene = new Scene();
+        let node = new Node({
+          name: "test"
+        })
+        scene.add(node);
+        console.log(scene);
+        S0.addScene(scene);
       }
     ).catch((e) => {
       console.error(e);

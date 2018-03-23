@@ -11,7 +11,8 @@ module.exports = {
   entry: {
     "app": [
       path.resolve(__dirname, 'src/main')
-    ]
+    ],
+    "s0-engine": ["s0-engine"]
   },
   output: {
     pathinfo: true,
@@ -19,6 +20,17 @@ module.exports = {
     filename: 'js/[name]-min.js'
   },
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 's0-engine',
+          test: 's0-engine',
+          enforce: true
+        },
+      }
+    },
+    // runtimeChunk: true,
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
