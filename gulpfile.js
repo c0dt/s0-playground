@@ -2,7 +2,6 @@ const gulp = require("gulp");
 
 const webpack = require("webpack");
 const webpackStream = require("webpack-stream");
-const webpackConfig = require("./webpack.config");
 
 const browserSync = require('browser-sync').create();
 
@@ -10,7 +9,8 @@ const filter = require('gulp-filter');
 const gulpPngquant = require('gulp-pngquant');
 const zip = require('gulp-zip');
 
-gulp.task('webpack', () => {
+gulp.task('webpack-debug', () => {
+  const webpackConfig = require("./webpack.config");
   return webpackStream(webpackConfig, webpack)
     .pipe(gulp.dest("build/debug"));
 });
@@ -32,14 +32,14 @@ gulp.task('zip', () => {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('serve', gulp.series('copy-assets', 'webpack'), ()=> {
+gulp.task('serve', gulp.series('copy-assets', 'webpack-debug'), ()=> {
     browserSync.init({
         server: "./build/debug"
     });
-    gulp.watch("src/**/*.js", ['default']);
+    gulp.watch("src/**/*.js", ['webpack-debug']);
     gulp.watch("build/debug/**/*.*").on('change', browserSync.reload);
 });
 
-gulp.task('debug-build', gulp.series('copy-assets', 'webpack', 'zip'), ()=> {
+gulp.task('debug-build', gulp.series('copy-assets', 'webpack-debug', 'zip'), ()=> {
 
 });

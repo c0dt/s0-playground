@@ -3,7 +3,7 @@ let webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const entryFile = process.env.ENTRY_FILE;
+const entryFile = process.env.ENTRY_FILE || 'src/main';
 
 let definePlugin = new webpack.DefinePlugin({
   '__DEBUG__': true
