@@ -1,4 +1,4 @@
-import { S0, Scene, Node, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoader} from 's0-engine';
+import { S0, Scene, Node, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoader, Mesh, Accessor, Material, BufferView } from 's0-engine';
 
 export default class Main {
   constructor() {
@@ -36,7 +36,7 @@ export default class Main {
         let scene = new Scene();
         let node = new Node({
           name: "test"
-        })
+        });
         scene.add(node);
         console.log(scene);
         S0.addScene(scene);

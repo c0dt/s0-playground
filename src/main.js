@@ -3,7 +3,7 @@ import { S0, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoa
 export default class Main {
   constructor() {
     S0.initWith(document.createElement('canvas'));
-
+    
     let loadTasks = [];
     let task = ResourcePipeline.loadAsync('IBL/default/env/cubemap.json', { loaderClass: CubemapLoader })
       .then((cubemap) => {
@@ -32,8 +32,9 @@ export default class Main {
     loadTasks.push(task);
     
     let urls = [
-      'Ganfaul/model.gltf'
+      'Miniscene/model.gltf'
     ];
+    
     Promise.all(loadTasks).then(
       () => {
         urls.forEach((url) => {

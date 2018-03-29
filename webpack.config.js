@@ -1,6 +1,5 @@
 let path = require('path');
 let webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const entryFile = process.env.ENTRY_FILE || 'src/main';
