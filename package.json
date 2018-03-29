@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "ENTRY_FILE='src/main' webpack --mode=development",
-    "test-visualizer": "ENTRY_FILE='src/visualizer' webpack --mode=development",
     "build": "NODE_ENV=production webpack -p --config ./webpack.production.config.js"
   },
   "author": "",
