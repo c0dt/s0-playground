@@ -51,6 +51,7 @@ gulp.task('serve', () => {
   gulp.watch("packages/**/*.glsl", gulp.series('webpack-debug'));
   gulp.watch("packages/**/*.js", gulp.series('webpack-debug'));
   gulp.watch("src/**/*.js", gulp.series('webpack-debug'));
+  gulp.watch("src/**/*.glsl", gulp.series('webpack-debug'));
   gulp.watch("build/debug/**/*.*").on('change', browserSync.reload);
 });
 

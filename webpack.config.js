@@ -51,8 +51,8 @@ module.exports = {
         },
         exclude: /node_modules\//
       },
-      { test: /\.(glsl|frag|vert)$/, loader: 'raw-loader', include: [ path.join(__dirname, 'packages') ], exclude: /node_modules/ },
-      { test: /\.(glsl|frag|vert)$/, loader: 'glslify-loader', include: [ path.join(__dirname, 'packages') ], exclude: /node_modules/ },
+      { test: /\.(glsl|frag|vert)$/, loader: 'raw-loader', include: [ path.join(__dirname, 'src'), path.join(__dirname, 'packages') ], exclude: /node_modules/ },
+      { test: /\.(glsl|frag|vert)$/, loader: 'glslify-loader', include: [ path.join(__dirname, 'src'), path.join(__dirname, 'packages') ], exclude: /node_modules/ },
     ]
   },
   node: {
