@@ -21,5 +21,8 @@
     "gulp-pngquant": "^1.0.12",
     "gulp-zip": "^4.1.0",
     "webpack-stream": "^4.0.2"
+  },
+  "dependencies": {
+    "polyline-normals": "^2.0.2"
   }
 }

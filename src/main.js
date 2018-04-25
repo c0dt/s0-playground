@@ -1,29 +1,29 @@
 import { S0, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoader, Node, Mesh, Cube } from 's0-engine';
 import { vec3, mat4, quat /* vec4, mat4 */ } from 'gl-matrix';
-import CubeTestMaterial from './CubeTestMaterial'
-
+import TestMaterial from './TestMaterial';
+import TestGeometry from './TestGeometry';
 export default class Main {
   constructor() {
     S0.initWith(document.createElement('canvas'));
-    this.loadModelTest().then(scene=>{
+    this.loadModelTest().then((scene) => {
       let node = new Node();
-      node.translation = vec3.fromValues(0,0,0);
-      let i = 10;
-      node.rotation = quat.fromEuler(quat.create(), i, i, i);
-      let test = () => {
-        i+=10;
-        node.rotation = quat.fromEuler(quat.create(), i, i, i);
-        setTimeout(test,500);
-      };
+      node.translation = vec3.fromValues(0, 0, 0);
+      // let i = 10;
+      // node.rotation = quat.fromEuler(quat.create(), i, i, i);
+      // let test = () => {
+      //   i += 10;
+      //   node.rotation = quat.fromEuler(quat.create(), i, i, i);
+      //   setTimeout(test, 500);
+      // };
 
-      setTimeout(test,1000);
-      node.mesh = new Mesh({name:"test cube"});
-      let cube = new Cube(1);
-      cube._material = new CubeTestMaterial([75 / 255, 188 / 255, 92 / 255]);
-      node.mesh._primitives = [cube];
+      // setTimeout(test, 1000);
+      node.mesh = new Mesh({ name: "test geometry" });
+      let geometry = new TestGeometry();
+      geometry._material = new TestMaterial(this.testTexture, this.noiseTexture);
+      node.mesh._primitives = [geometry];
       
       scene.add(node);
-    })
+    });
   }
 
   loadModelTest() {
@@ -53,14 +53,34 @@ export default class Main {
         return Promise.resolve();
       });
     loadTasks.push(task);
-    
+    task = ResourcePipeline.loadAsync('texture-repetition/gfx00.jpg', { name: 'texture-repetition-gfx00', loaderClass: TextureLoader })
+      .then((texture) => {
+        // texture.setTextureMode(0);
+        this.testTexture = texture.texture;
+        return Promise.resolve();
+      });
+    loadTasks.push(task);
+    task = ResourcePipeline.loadAsync('texture-repetition/rgba-noise-small.png', { name: 'rgba-noise-small', loaderClass: TextureLoader })
+      .then((texture) => {
+        texture.setTextureMode(3);
+        this.noiseTexture = texture.texture;
+        return Promise.resolve();
+      });
+    loadTasks.push(task);
+    task = ResourcePipeline.loadAsync('texture-repetition/gray-noise-medium.png', { name: 'gray-noise-medium', loaderClass: TextureLoader })
+      .then((texture) => {
+        texture.setTextureMode(3);
+        this.noiseTexture = texture.texture;
+        return Promise.resolve();
+      });
+    loadTasks.push(task);
     let urls = [
       'Ganfaul/model.gltf'
     ];
     
     return Promise.all(loadTasks).then(
       () => {
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
           urls.forEach((url) => {
             ResourcePipeline.loadAsync(`${url}`).then(
               (asset) => {
