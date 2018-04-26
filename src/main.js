@@ -18,19 +18,20 @@ export default class Main {
       // PostProcessingManager.add(new PostProcessingMaterial(new Shader(vsTest, fs4Test)));
       // PostProcessingManager.add(new PostProcessingMaterial(new Shader(vsTest, fsTest)));
       let node = new Node();
+      let geometry = new TestGeometry();
       node.translation = vec3.fromValues(0, 0, 0);
       node.scale = vec3.fromValues(0.5, 0.5, 0.5);
-      // let i = 10;
+      let i = 0;
       // node.rotation = quat.fromEuler(quat.create(), i, i, i);
-      // let test = () => {
-      //   i += 10;
-      //   node.rotation = quat.fromEuler(quat.create(), i, i, i);
-      //   setTimeout(test, 500);
-      // };
+      let test = () => {
+        i += 1;
+        geometry.test(i % 10);
+        setTimeout(test, 500);
+      };
 
-      // setTimeout(test, 1000);
+      setTimeout(test, 1000);
       node.mesh = new Mesh({ name: "test geometry" });
-      let geometry = new TestGeometry();
+
       geometry._material = new TestMaterial(this.testTexture, this.noiseTexture);
       node.mesh._primitives = [geometry];
       scene.add(node);

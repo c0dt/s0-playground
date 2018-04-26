@@ -27,7 +27,7 @@ export default class TestGeometry {
     this.vertexBuffer = gl.createBuffer();
     S0.isWebGL2 ? gl.bindVertexArray(this.vertexArray) : ext.bindVertexArray(this.vertexArray);
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, this.vertexData, gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, this.vertexData, gl.DYNAMIC_DRAW);
     gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 5 * 4, 0);
     gl.enableVertexAttribArray(0);
     gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 5 * 4, 3 * 4);
@@ -53,6 +53,25 @@ export default class TestGeometry {
     this._mode = gl.TRIANGLES;
     this._drawArraysOffset = 0;
     this._drawArraysCount = 4;
+  }
+
+  test(v) {
+    this.vertexData = new Float32Array([
+      -1.0, 1.0, 0.0, 0.0, 1.0,
+      -1.0, -1.0, 0.0, 0.0, 0.0,
+      1.0, 1.0, 0.0, 1.0, 1.0,
+      1.0, -1.0, 0.0, 1.0, 0.0,
+
+      0.0, v, 0.0, 0.0, 1.0,
+      0.0, -v, 0.0, 0.0, 0.0,
+      2.0, v, 0.0, 1.0, 1.0,
+      2.0, -v, 0.0, 1.0, 0.0
+    ]);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this.vertexData);
+    //void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);
+    gl.bufferSubData(gl.ARRAY_BUFFER, 20 * 4, this.vertexData, 20, this.vertexData.length - 20);
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);
   }
   
 }
