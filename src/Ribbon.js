@@ -1,24 +1,13 @@
-import { S0 } from 's0-engine';
-import getNormals from 'polyline-normals';
+import { S0, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoader, Node, Mesh, Cube } from 's0-engine';
 
-export default class TestGeometry {
+export default class Ribbon {
   constructor() {
     this.vertexData = new Float32Array([
       -1.0, 1.0, 0.0, 0.0, 1.0,
       -1.0, -1.0, 0.0, 0.0, 0.0,
       1.0, 1.0, 0.0, 1.0, 1.0,
-      1.0, -1.0, 0.0, 1.0, 0.0,
-
-      0.0, 2.0, 0.0, 0.0, 1.0,
-      0.0, -1.0, 0.0, 0.0, 0.0,
-      2.0, 2.0, 0.0, 1.0, 1.0,
-      2.0, -1.0, 0.0, 1.0, 0.0
+      1.0, -1.0, 0.0, 1.0, 0.0
     ]);
-    //a triangle 
-    let path = [ [0, 122], [0, 190], [90, 190]];
-    //get the normals as a closed loop 
-    let normals = getNormals(path, true);
-    console.log(normals);
   }
 
 
@@ -32,25 +21,11 @@ export default class TestGeometry {
     gl.enableVertexAttribArray(0);
     gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 5 * 4, 3 * 4);
     gl.enableVertexAttribArray(1);
-    let indexbuffer = gl.createBuffer();
-    let indexbufferArray = new Uint16Array([
-      0, 1, 2,
-      3, 2, 1,
-
-      0 + 4, 1 + 4, 2 + 4,
-      3 + 4, 2 + 4, 1 + 4,
-    ]);
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexbuffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indexbufferArray, gl.STATIC_DRAW);
     S0.isWebGL2 ? gl.bindVertexArray(null) : ext.bindVertexArrayOES(null);
 
     this._vao = this.vertexArray;
-    this._indices = {
-      _count: indexbufferArray.length,
-      _componentType: 5123,
-      _byteOffset: 0
-    };
-    this._mode = gl.TRIANGLES;
+    this._indices = null;
+    this._mode = gl.TRIANGLE_STRIP;
     this._drawArraysOffset = 0;
     this._drawArraysCount = 4;
   }

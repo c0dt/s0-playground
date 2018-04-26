@@ -1,13 +1,25 @@
-import { S0, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoader, Node, Mesh, Cube } from 's0-engine';
+import { S0, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoader, Node, Mesh, Cube,
+  Shader,
+  PostProcessingMaterial, PostProcessingManager } from 's0-engine';
 import { vec3, mat4, quat /* vec4, mat4 */ } from 'gl-matrix';
 import TestMaterial from './TestMaterial';
 import TestGeometry from './TestGeometry';
+
+import vsTest from './shaders/Quad.noMVP.vs.glsl';
+import fsTest from './shaders/RGBSplit.fs.glsl';
+import fs2Test from './shaders/BayerDithering.fs.glsl';
+import fs3Test from './shaders/Threshold.fs.glsl';
+import fs4Test from './shaders/Mosaic.fs.glsl';
+
 export default class Main {
   constructor() {
     S0.initWith(document.createElement('canvas'));
     this.loadModelTest().then((scene) => {
+      // PostProcessingManager.add(new PostProcessingMaterial(new Shader(vsTest, fs4Test)));
+      // PostProcessingManager.add(new PostProcessingMaterial(new Shader(vsTest, fsTest)));
       let node = new Node();
       node.translation = vec3.fromValues(0, 0, 0);
+      node.scale = vec3.fromValues(0.5, 0.5, 0.5);
       // let i = 10;
       // node.rotation = quat.fromEuler(quat.create(), i, i, i);
       // let test = () => {
@@ -21,7 +33,6 @@ export default class Main {
       let geometry = new TestGeometry();
       geometry._material = new TestMaterial(this.testTexture, this.noiseTexture);
       node.mesh._primitives = [geometry];
-      
       scene.add(node);
     });
   }

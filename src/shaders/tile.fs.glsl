@@ -12,7 +12,7 @@ uniform sampler2D uNoiseTexture;
 
 in vec2 vTexcoord0;
 
-#define TECHNIQUE_0
+#define TECHNIQUE_3
 #define USEHASH
 
 #ifdef TECHNIQUE_1
