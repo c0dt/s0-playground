@@ -68,7 +68,7 @@ export default class TestGeometry {
       2.0, -v, 0.0, 1.0, 0.0
     ]);
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
-    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this.vertexData);
+    // gl.bufferSubData(gl.ARRAY_BUFFER, 0, this.vertexData);
     //void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);
     gl.bufferSubData(gl.ARRAY_BUFFER, 20 * 4, this.vertexData, 20, this.vertexData.length - 20);
     gl.bindBuffer(gl.ARRAY_BUFFER, null);

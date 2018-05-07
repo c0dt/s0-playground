@@ -1,0 +1,10 @@
+{
+    "source":{
+        "right" : "crosses.png",
+        "left" : "crosses.png",
+        "top" : "crosses.png",
+        "bottom" : "crosses.png",
+        "front" : "crosses.png",
+        "back" : "crosses.png"
+    }
+}
