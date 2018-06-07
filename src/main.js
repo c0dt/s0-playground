@@ -1,5 +1,7 @@
-import { S0, IBLManager, LUTManager, ResourcePipeline, CubemapLoader, TextureLoader, Node, Mesh, Cube,
-  Shader,
+import { S0, 
+  IBLManager, LUTManager, 
+  ResourcePipeline, CubemapLoader, TextureLoader, Node, Mesh, 
+  Cube, Shader,
   PostProcessingMaterial, PostProcessingManager } from 's0-engine';
 import { vec3, mat4, quat /* vec4, mat4 */ } from 'gl-matrix';
 import TestMaterial from './TestMaterial';
@@ -10,6 +12,8 @@ import fsTest from './shaders/RGBSplit.fs.glsl';
 import fs2Test from './shaders/BayerDithering.fs.glsl';
 import fs3Test from './shaders/Threshold.fs.glsl';
 import fs4Test from './shaders/Mosaic.fs.glsl';
+
+import TestWorker from './Test.worker.js';
 
 export default class Main {
   constructor() {
@@ -35,6 +39,13 @@ export default class Main {
       geometry._material = new TestMaterial(this.testTexture, this.noiseTexture);
       node.mesh._primitives = [geometry];
       scene.add(node);
+ 
+      const worker = new TestWorker();
+ 
+      worker.postMessage({ a: 1 });
+      worker.onmessage = (event) => {
+        console.log("[onmessage] main thread");
+      };
     });
   }
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ENTRY_FILE='src/main' webpack --mode=development",
+    "test": "ENTRY_FILE='src/ECSMain' webpack --mode=development",
     "build": "NODE_ENV=production webpack -p --config ./webpack.production.config.js"
   },
   "author": "",
@@ -20,7 +20,8 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-pngquant": "^1.0.12",
     "gulp-zip": "^4.1.0",
-    "webpack-stream": "^4.0.2"
+    "webpack-stream": "^4.0.2",
+    "worker-loader": "^1.1.1"
   },
   "dependencies": {
     "polyline-normals": "^2.0.2"

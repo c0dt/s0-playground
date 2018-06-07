@@ -36,9 +36,6 @@ export default class TestGeometry {
     let indexbufferArray = new Uint16Array([
       0, 1, 2,
       3, 2, 1,
-
-      0 + 4, 1 + 4, 2 + 4,
-      3 + 4, 2 + 4, 1 + 4,
     ]);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexbuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indexbufferArray, gl.STATIC_DRAW);
