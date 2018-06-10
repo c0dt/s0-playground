@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ENTRY_FILE='src/ECSMain' webpack --mode=development",
+    "test": "ENTRY_FILE='src/Main' webpack --mode=development",
     "build": "NODE_ENV=production webpack -p --config ./webpack.production.config.js"
   },
   "author": "",

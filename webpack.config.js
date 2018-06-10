@@ -2,7 +2,7 @@ let path = require('path');
 let webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const entryFile = process.env.ENTRY_FILE || 'src/ECSMain';
+const entryFile = process.env.ENTRY_FILE || 'src/Main';
 
 let definePlugin = new webpack.DefinePlugin({
   '__DEBUG__': true
