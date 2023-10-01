@@ -2,7 +2,7 @@ let path = require('path');
 let webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const entryFile = process.env.ENTRY_FILE || 'src/Main';
+const entryFile = process.env.ENTRY_FILE || 'src/M';
 
 let definePlugin = new webpack.DefinePlugin({
   '__DEBUG__': true
@@ -13,9 +13,9 @@ module.exports = {
     app: [
       path.resolve(__dirname, entryFile)
     ],
-    "test-worker": [
-      path.resolve(__dirname, 'src/Test.worker.js')
-    ],
+    // "test-worker": [
+    //   path.resolve(__dirname, 'src/Test.worker.js')
+    // ],
     "s0-engine": ["s0-engine"]
   },
   devtool: 'source-map',
@@ -55,18 +55,18 @@ module.exports = {
         },
         exclude: /node_modules\//
       },
-      {
-        test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' }
-      },
+      // {
+      //   test: /\.worker\.js$/,
+      //   use: { loader: 'worker-loader' }
+      // },
       { test: /\.(glsl|frag|vert)$/, loader: 'raw-loader', include: [ path.join(__dirname, 'src'), path.join(__dirname, 'packages') ], exclude: /node_modules/ },
       { test: /\.(glsl|frag|vert)$/, loader: 'glslify-loader', include: [ path.join(__dirname, 'src'), path.join(__dirname, 'packages') ], exclude: /node_modules/ },
     ]
   },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
+  resolve: {
+    fallback: {
+      fs: false
+    }
   },
   mode: "development"
 };

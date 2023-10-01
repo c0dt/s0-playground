@@ -10,7 +10,7 @@ let definePlugin = new webpack.DefinePlugin({
 module.exports = {
   entry: {
     "app": [
-      path.resolve(__dirname, 'src/main')
+      path.resolve(__dirname, 'src/m')
     ],
     "s0-engine": ["s0-engine"]
   },
@@ -74,13 +74,13 @@ module.exports = {
       },
       { test: /\.(glsl|frag|vert)$/, loader: 'raw-loader', include: [ path.join(__dirname, 'packages') ], exclude: /node_modules/ },
       { test: /\.(glsl|frag|vert)$/, loader: 'glslify-loader', include: [ path.join(__dirname, 'packages') ], exclude: /node_modules/ },
-      { test: /\.worker\.js$/, loader: "worker!babel?presets[]=es2015", include: [ path.join(__dirname, 'src') ], exclude: /node_modules/ }
+      // { test: /\.worker\.js$/, loader: "worker!babel?presets[]=es2015", include: [ path.join(__dirname, 'src') ], exclude: /node_modules/ }
     ]
   },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
+  resolve: {
+    fallback: {
+      fs: false
+    }
   },
   mode: "production"
 };

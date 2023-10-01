@@ -22,30 +22,30 @@ export default class Main {
       // PostProcessingManager.add(new PostProcessingMaterial(new Shader(vsTest, fs4Test)));
       // PostProcessingManager.add(new PostProcessingMaterial(new Shader(vsTest, fsTest)));
       let node = new Node();
-      let geometry = new TestGeometry();
+      // let geometry = new TestGeometry();
       node.translation = vec3.fromValues(0, 0, 0);
       node.scale = vec3.fromValues(0.5, 0.5, 0.5);
       let i = 0;
       // node.rotation = quat.fromEuler(quat.create(), i, i, i);
       let test = () => {
         i += 1;
-        geometry.test(i % 10);
+        // geometry.test(i % 10);
         setTimeout(test, 500);
       };
 
       setTimeout(test, 1000);
       node.mesh = new Mesh({ name: "test geometry" });
 
-      geometry._material = new TestMaterial(this.testTexture, this.noiseTexture);
-      node.mesh._primitives = [geometry];
+      // geometry._material = new TestMaterial(this.testTexture, this.noiseTexture);
+      // node.mesh._primitives = [geometry];
       scene.add(node);
  
-      const worker = new TestWorker();
+      // const worker = new TestWorker();
  
-      worker.postMessage({ a: 1 });
-      worker.onmessage = (event) => {
-        console.log("[onmessage] main thread");
-      };
+      // worker.postMessage({ a: 1 });
+      // worker.onmessage = (event) => {
+      //   console.log("[onmessage] main thread");
+      // };
     });
   }
 

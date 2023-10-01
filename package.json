@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ENTRY_FILE='src/Main' webpack --mode=development",
-    "build": "NODE_ENV=production webpack -p --config ./webpack.production.config.js"
+    "test": "ENTRY_FILE='src/main' webpack --mode=development",
+    "build": "set NODE_ENV=production&& webpack --mode production --config ./webpack.production.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,8 +20,24 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-pngquant": "^1.0.12",
     "gulp-zip": "^4.1.0",
-    "webpack-stream": "^4.0.2",
-    "worker-loader": "^1.1.1"
+    "webpack-stream": "^7.0.0",
+    "worker-loader": "^1.1.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "copy-webpack-plugin": "^4.3.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-private-props": "^0.3.0",
+    "glslify-loader": "^1.0.2",
+    "html-webpack-plugin": "^5.5.3",
+    "raw-loader": "^0.5.1",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "polyline-normals": "^2.0.2"
