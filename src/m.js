@@ -98,7 +98,7 @@ export default class Main {
       });
     loadTasks.push(task);
     let urls = [
-      'Ganfaul/model.gltf'
+      'Ganfaul/shione-1.1.7.vrm'
     ];
     
     return Promise.all(loadTasks).then(

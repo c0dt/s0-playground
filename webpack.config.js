@@ -55,6 +55,11 @@ module.exports = {
         },
         exclude: /node_modules\//
       },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       // {
       //   test: /\.worker\.js$/,
       //   use: { loader: 'worker-loader' }
@@ -64,6 +69,7 @@ module.exports = {
     ]
   },
   resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
     fallback: {
       fs: false
     }
